@@ -1,0 +1,31 @@
+version: '3.6'
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:5.2.1
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+      ZOOKEEPER_SYNC_LIMIT: 2
+
+  kafka:
+    image: confluentinc/cp-kafka:5.2.1
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+
+  producer:
+    image: spring-boot-kafka/producer
+    depends_on:
+      - kafka
+    ports:
+      - "8080:8080"
+
+  consumer:
+    image: spring-boot-kafka/consumer
+    depends_on:
+      - kafka
