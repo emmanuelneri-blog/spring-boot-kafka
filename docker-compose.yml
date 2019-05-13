@@ -9,23 +9,13 @@ services:
 
   kafka:
     image: confluentinc/cp-kafka:5.2.1
+    ports:
+      - "9092:9092"
     depends_on:
       - zookeeper
     environment:
       KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
-
-  producer:
-    image: spring-boot-kafka/producer
-    depends_on:
-      - kafka
-    ports:
-      - "8080:8080"
-
-  consumer:
-    image: spring-boot-kafka/consumer
-    depends_on:
-      - kafka
