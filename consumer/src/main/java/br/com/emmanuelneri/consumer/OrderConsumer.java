@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class OrderConsumer {
 
+
     @KafkaListener(topics = "${order.topic}", groupId = "${spring.kafka.consumer.group-id}")
     public void consumer(final ConsumerRecord<String, Order> consumerRecord) {
         log.info("key: " + consumerRecord.key());
