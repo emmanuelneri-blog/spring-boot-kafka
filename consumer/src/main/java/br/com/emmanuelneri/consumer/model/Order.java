@@ -1,16 +1,14 @@
 package br.com.emmanuelneri.consumer.model;
 
-import lombok.Getter;
-import lombok.ToString;
+import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-@ToString
-@Getter
-public class Order {
+@Data
+public class Order implements Serializable {
 
     private String identifier;
     private String customer;
     private BigDecimal value;
-
 }

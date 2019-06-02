@@ -24,6 +24,7 @@
 
 		<spring-kafka.version>2.2.2.RELEASE</spring-kafka.version>
 		<lombok.version>1.16.10</lombok.version>
+		<jackson.version>2.9.8</jackson.version>
 
 		<docker.spotify.plugin.version>1.4.10</docker.spotify.plugin.version>
 		<docker.repository>spring-boot-kafka</docker.repository>
